@@ -60,13 +60,17 @@ const gameBoard = (() => {
         }
     }
 
+    const checkDraw = () => {
+        return board.filter(cell => cell.getValue() === 0).length === 0;        
+    }
+
     const clear = () => {
         init();
     }
 
     init();
 
-    return {getBoard ,printBoard, markCell, getCell, checkWinFor, clear};
+    return {getBoard ,printBoard, markCell, getCell, checkWinFor, checkDraw, clear};
 })();
 
 const Game = ((playerOneName = "Player X", playerTwoName = "Player O") => {    
@@ -101,6 +105,7 @@ const Game = ((playerOneName = "Player X", playerTwoName = "Player O") => {
     }
 
     const checkWin = () => {
+        if (gameBoard.checkDraw()) return -1;
         if (gameBoard.checkWinFor(players[0].token)) {
             return players[0];
         }
@@ -137,8 +142,14 @@ const ScreenController = (() => {
                 break;
             }
         }
+        if (winner === -1) {
+            playerTurnDiv.textContent = `It's a Draw!`;
+            endGame();
+            return;
+        }
+
         if (winner) {            
-            playerTurnDiv.textContent = `${winner.name} WON`;
+            playerTurnDiv.textContent = `${winner.name} Won!`;
             endGame();
             return;
         }
