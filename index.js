@@ -105,13 +105,13 @@ const Game = ((playerOneName = "Player X", playerTwoName = "Player O") => {
     }
 
     const checkWin = () => {
-        if (gameBoard.checkDraw()) return -1;
         if (gameBoard.checkWinFor(players[0].token)) {
             return players[0];
         }
         if (gameBoard.checkWinFor(players[1].token)) {
             return players[1];
         }
+        if (gameBoard.checkDraw()) return -1;
     }
     
     return {reset, playRound, getActivePlayer, checkWin};
@@ -141,13 +141,12 @@ const ScreenController = (() => {
                 cell.textContent = gameBoard.getCell(cellId).getValue();
                 break;
             }
-        }
+        }        
         if (winner === -1) {
             playerTurnDiv.textContent = `It's a Draw!`;
             endGame();
             return;
         }
-
         if (winner) {            
             playerTurnDiv.textContent = `${winner.name} Won!`;
             endGame();
