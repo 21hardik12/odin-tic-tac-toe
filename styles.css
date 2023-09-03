@@ -68,6 +68,8 @@ main .board {
     background-color: black;
     padding: .1rem;
     margin-bottom: 4rem;
+    width: 20%;
+    aspect-ratio: 1/1;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -76,9 +78,8 @@ main .board {
 }
 
 main .cell {
-    font-size: 7rem;    
-    width: 10rem;
-    height: 10rem;
+    font-size: 7rem;        
+    aspect-ratio: 1 / 1;
     background-color: #ededee;    
 }
 
